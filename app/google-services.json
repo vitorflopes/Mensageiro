@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "737987281602",
+    "project_id": "mensageiro-55ceb",
+    "storage_bucket": "mensageiro-55ceb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:737987281602:android:9a0d47c9399b599696f15b",
+        "android_client_info": {
+          "package_name": "com.example.mensageiro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "737987281602-qb89fiqa9qhavabke8grt1f2mu6071pu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyEXRURm7O2dBX_AOfXXHihebXq_-ClQQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "737987281602-qb89fiqa9qhavabke8grt1f2mu6071pu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
