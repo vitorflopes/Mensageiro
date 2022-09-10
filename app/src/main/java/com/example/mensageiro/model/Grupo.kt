@@ -1,7 +1,7 @@
 package com.example.mensageiro.model
 
 data class Grupo (
-    var idLider: String? = null,
+    var lider: Usuario? = null,
     var nome: String? = null,
     var descricao: String? = null,
     var listaTarefas: MutableList<Tarefa>? = null,

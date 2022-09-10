@@ -11,7 +11,6 @@ import com.example.mensageiro.model.Usuario
 class CriarGrupoViewModel : ViewModel() {
 
     val status = MutableLiveData<Boolean>()
-    lateinit var usuarioLogado: Usuario
 
     init {
         status.value = false
@@ -23,16 +22,12 @@ class CriarGrupoViewModel : ViewModel() {
         val task = UsuarioDao.exibirUsuario(idUsusarioLogado)
         task.addSnapshotListener { snapshot, error ->
             if (snapshot != null) {
-                usuarioLogado = snapshot.toObjects(Usuario::class.java).first()
-
-                grupo.idLider = idUsusarioLogado
-                grupo.listaParticipantes?.add(usuarioLogado)
-
+                val usuarioLogado = snapshot.toObjects(Usuario::class.java).first()
+                grupo.listaParticipantes = mutableListOf(usuarioLogado)
+                grupo.lider = usuarioLogado
                 GrupoDao.salvarGrupo(grupo)
                 status.value = true
             }
         }
-        
-
     }
 }
