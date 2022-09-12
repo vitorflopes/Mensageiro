@@ -37,5 +37,19 @@ class UsuarioDao {
 
             return task
         }
+
+        fun removeIdGrupotoUsuario(idUsuario: String, idGrupo: String): Task<QuerySnapshot> {
+            lateinit var listaIdGrupos: MutableList<String>
+
+            val task = exibirUsuario(idUsuario).addOnSuccessListener {
+                val usuario = it.toObjects(Usuario::class.java).first()
+                listaIdGrupos = usuario.listaIdGrupos!!
+                listaIdGrupos.remove(idGrupo)
+
+                collection.document(idUsuario).update("listaIdGrupos", listaIdGrupos)
+            }
+
+            return task
+        }
     }
 }

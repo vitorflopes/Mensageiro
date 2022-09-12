@@ -62,6 +62,9 @@
         <action
             android:id="@+id/action_infoGrupoFragment_to_adicionarTarefaFragment"
             app:destination="@id/adicionarTarefaFragment" />
+        <action
+            android:id="@+id/action_infoGrupoFragment_to_editarGrupoFragment"
+            app:destination="@id/editarGrupoFragment" />
     </fragment>
     <fragment
         android:id="@+id/addParticipanteFragment"
@@ -81,4 +84,9 @@
             android:name="idGrupo"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/editarGrupoFragment"
+        android:name="com.example.mensageiro.EditarGrupoFragment"
+        android:label="fragment_editar_grupo"
+        tools:layout="@layout/fragment_editar_grupo" />
 </navigation>

@@ -19,9 +19,11 @@ class ListaGruposViewModel : ViewModel() {
         task.addOnSuccessListener {
             val usuario = it.toObjects(Usuario::class.java).first()
 
-            val task = GrupoDao.listarGrupos(usuario.listaIdGrupos!!)
-            task.addOnSuccessListener {
-                listaGrupo.value = it.toObjects(Grupo::class.java)
+            if ((usuario.listaIdGrupos)!!.isNotEmpty()) {
+                val task = GrupoDao.listarGrupos(usuario.listaIdGrupos)
+                task.addOnSuccessListener {
+                    listaGrupo.value = it.toObjects(Grupo::class.java)
+                }
             }
         }
     }

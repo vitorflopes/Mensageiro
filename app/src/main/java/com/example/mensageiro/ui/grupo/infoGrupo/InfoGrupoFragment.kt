@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mensageiro.R
+import com.example.mensageiro.adapter.TarefaAdapter
 import com.example.mensageiro.databinding.FragmentInfoGrupoBinding
 
 class InfoGrupoFragment : Fragment() {
@@ -28,6 +30,7 @@ class InfoGrupoFragment : Fragment() {
 
         val idGrupo = argumentos.idGrupo
         viewModel.retornarGrupo(idGrupo)
+        viewModel.retornarTarefas(idGrupo)
 
         binding.btnAdicionarParticipanteInfo.setOnClickListener {
             val direcao = InfoGrupoFragmentDirections
@@ -41,9 +44,24 @@ class InfoGrupoFragment : Fragment() {
             findNavController().navigate(direcao)
         }
 
+        binding.btnExcluirGrupo.setOnClickListener {
+            viewModel.excluirGrupo(idGrupo)
+
+            findNavController().popBackStack()
+        }
+
         viewModel.grupo.observe(viewLifecycleOwner) {
             binding.tvNomeGrupoInfo.text = it.nome.toString()
             binding.tvDescricaoGrupoInfo.text = it.descricao.toString()
+        }
+
+        binding.rvListaTarefas.layoutManager = LinearLayoutManager(context)
+        binding.rvListaTarefas.setHasFixedSize(true)
+        viewModel.listaTarefas.observe(viewLifecycleOwner) {
+            binding.rvListaTarefas.adapter = TarefaAdapter(it) { tarefa ->
+                viewModel.excluirTarefa(tarefa.id!!, idGrupo)
+                findNavController().popBackStack()
+            }
         }
 
         return view

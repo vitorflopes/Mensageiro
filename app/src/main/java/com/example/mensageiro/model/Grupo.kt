@@ -5,8 +5,8 @@ data class Grupo (
     var idLider: String? = null,
     var nome: String? = null,
     var descricao: String? = null,
-    var listaIdTarefas: MutableList<String>? = null,
-    var listaIdParticipantes: MutableList<String>? = null
+    var listaIdTarefas: MutableList<String>? = arrayListOf(),
+    var listaIdParticipantes: MutableList<String>? = arrayListOf()
         )
 
 data class Tarefa (

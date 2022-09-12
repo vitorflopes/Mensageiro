@@ -2,6 +2,7 @@ package com.example.mensageiro.ui.tarefa
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.mensageiro.dao.GrupoDao
 import com.example.mensageiro.dao.TarefaDao
 import com.example.mensageiro.model.Tarefa
 
@@ -15,7 +16,9 @@ class AdicionarTarefaViewModel : ViewModel() {
 
     fun adicionarTarefa(idGrupo: String, tarefa: Tarefa) {
         TarefaDao.salvarTarefas(tarefa, idGrupo).addOnSuccessListener {
-            status.value = true
+            GrupoDao.addIdTarefaToGrupo(it.id, idGrupo).addOnSuccessListener {
+                status.value = true
+            }
         }
     }
 }
