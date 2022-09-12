@@ -13,6 +13,5 @@ data class Tarefa (
     val id: String? = null,
     val nome: String? = null,
     val descricao: String? = null,
-    val concluida: Boolean? = false,
-    val listaIdParticipantes: MutableList<String>? = null
+    var idGrupo: String? = null
         )

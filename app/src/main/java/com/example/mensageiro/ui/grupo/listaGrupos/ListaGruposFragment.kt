@@ -34,8 +34,9 @@ class ListaGruposFragment : Fragment() {
 
         viewModel.listaGrupo.observe(viewLifecycleOwner) {
             binding.rvListaGrupo.adapter = GrupoAdapter(it) { grupo ->
-                //findNavController().navigate(R.)
-                Toast.makeText(context, grupo.nome, Toast.LENGTH_LONG).show()
+                val direcao = ListaGruposFragmentDirections
+                    .actionListaGruposFragmentToInfoGrupoFragment(grupo.id!!)
+                findNavController().navigate(direcao)
             }
         }
 

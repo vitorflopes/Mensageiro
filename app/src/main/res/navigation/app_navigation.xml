@@ -45,14 +45,38 @@
         android:label="fragment_lista_grupos"
         tools:layout="@layout/fragment_lista_grupos" >
         <action
-            android:id="@+id/action_listaGruposFragment_to_detalhesGrupoFragment"
-            app:destination="@id/detalhesGrupoFragment" />
+            android:id="@+id/action_listaGruposFragment_to_infoGrupoFragment"
+            app:destination="@id/infoGrupoFragment" />
     </fragment>
     <fragment
-        android:id="@+id/detalhesGrupoFragment"
-        android:name="com.example.mensageiro.ui.grupo.detalhesGrupo.DetalhesGrupoFragment"
-        android:label="fragment_detalhes_grupo"
-        tools:layout="@layout/fragment_detalhes_grupo" >
+        android:id="@+id/infoGrupoFragment"
+        android:name="com.example.mensageiro.ui.grupo.infoGrupo.InfoGrupoFragment"
+        android:label="fragment_info_grupo"
+        tools:layout="@layout/fragment_info_grupo" >
+        <argument
+            android:name="idGrupo"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_infoGrupoFragment_to_addParticipanteFragment"
+            app:destination="@id/addParticipanteFragment" />
+        <action
+            android:id="@+id/action_infoGrupoFragment_to_adicionarTarefaFragment"
+            app:destination="@id/adicionarTarefaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addParticipanteFragment"
+        android:name="com.example.mensageiro.ui.addParticipante.AddParticipanteFragment"
+        android:label="fragment_add_participante"
+        tools:layout="@layout/fragment_add_participante" >
+        <argument
+            android:name="idGrupo"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/adicionarTarefaFragment"
+        android:name="com.example.mensageiro.ui.tarefa.AdicionarTarefaFragment"
+        android:label="fragment_adicionar_tarefa"
+        tools:layout="@layout/fragment_adicionar_tarefa" >
         <argument
             android:name="idGrupo"
             app:argType="string" />

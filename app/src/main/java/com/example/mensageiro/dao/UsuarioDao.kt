@@ -21,6 +21,10 @@ class UsuarioDao {
             return collection.whereEqualTo("id", idUsuario).get()
         }
 
+        fun exibirUsuarioByEmail(emailUsuario: String): Task<QuerySnapshot> {
+            return collection.whereEqualTo("email", emailUsuario).get()
+        }
+
         fun addIdGrupotoUsuario(idUsuario: String, idGrupo: String): Task<QuerySnapshot> {
             lateinit var listaIdgrupos: MutableList<String>
 

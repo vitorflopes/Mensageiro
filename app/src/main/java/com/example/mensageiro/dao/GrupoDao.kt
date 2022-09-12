@@ -27,5 +27,18 @@ class GrupoDao {
         fun listarGrupos(listaIdGrupos: List<String>): Task<QuerySnapshot> {
             return collection.whereIn("id", listaIdGrupos).get()
         }
+
+        fun addIdParticipanteToGrupo(idNovoParticipante: String, idGrupo: String): Task<QuerySnapshot> {
+            lateinit var listaIdParticipantes: MutableList<String>
+
+            val task = exibirGrupo(idGrupo).addOnSuccessListener {
+                val grupo = it.toObjects(Grupo::class.java).first()
+                listaIdParticipantes = grupo.listaIdParticipantes!!
+                listaIdParticipantes.add(idNovoParticipante)
+                collection.document(idGrupo).update("listaIdParticipantes", listaIdParticipantes)
+            }
+
+            return task
+        }
     }
 }
