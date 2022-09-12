@@ -86,7 +86,11 @@
     </fragment>
     <fragment
         android:id="@+id/editarGrupoFragment"
-        android:name="com.example.mensageiro.EditarGrupoFragment"
+        android:name="com.example.mensageiro.ui.grupo.editarGrupo.EditarGrupoFragment"
         android:label="fragment_editar_grupo"
-        tools:layout="@layout/fragment_editar_grupo" />
+        tools:layout="@layout/fragment_editar_grupo" >
+        <argument
+            android:name="idGrupo"
+            app:argType="string" />
+    </fragment>
 </navigation>

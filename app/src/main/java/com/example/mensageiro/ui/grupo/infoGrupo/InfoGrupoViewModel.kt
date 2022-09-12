@@ -8,7 +8,6 @@ import com.example.mensageiro.dao.TarefaDao
 import com.example.mensageiro.dao.UsuarioDao
 import com.example.mensageiro.model.Grupo
 import com.example.mensageiro.model.Tarefa
-import com.example.mensageiro.model.Usuario
 
 class InfoGrupoViewModel : ViewModel() {
 

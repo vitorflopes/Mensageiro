@@ -75,5 +75,13 @@ class GrupoDao {
 
             return task
         }
+
+        fun salvarAlteracaoGrupo(idGrupo: String, nomeGrupo: String, decricaoGrupo: String): Task<Void> {
+
+            return collection.document(idGrupo).update(mapOf(
+                "nome" to nomeGrupo,
+                "descricao" to decricaoGrupo
+            ))
+        }
     }
 }

@@ -50,6 +50,12 @@ class InfoGrupoFragment : Fragment() {
             findNavController().popBackStack()
         }
 
+        binding.btnEditarGrupo.setOnClickListener {
+            val direcao = InfoGrupoFragmentDirections
+                .actionInfoGrupoFragmentToEditarGrupoFragment(idGrupo)
+            findNavController().navigate(direcao)
+        }
+
         viewModel.grupo.observe(viewLifecycleOwner) {
             binding.tvNomeGrupoInfo.text = it.nome.toString()
             binding.tvDescricaoGrupoInfo.text = it.descricao.toString()
