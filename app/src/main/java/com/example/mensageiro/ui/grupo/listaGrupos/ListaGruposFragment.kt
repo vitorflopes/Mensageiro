@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mensageiro.R
 import com.example.mensageiro.adapter.GrupoAdapter
@@ -27,7 +29,15 @@ class ListaGruposFragment : Fragment() {
 
         binding.rvListaGrupo.layoutManager = LinearLayoutManager(context)
         binding.rvListaGrupo.setHasFixedSize(true)
-        //binding.rvListaGrupo.adapter = GrupoAdapter()
+
+        viewModel.retornarListaGrupo()
+
+        viewModel.listaGrupo.observe(viewLifecycleOwner) {
+            binding.rvListaGrupo.adapter = GrupoAdapter(it) { grupo ->
+                //findNavController().navigate(R.)
+                Toast.makeText(context, grupo.nome, Toast.LENGTH_LONG).show()
+            }
+        }
 
         return view
     }

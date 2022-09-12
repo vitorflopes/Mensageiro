@@ -29,6 +29,15 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.criarGrupoFragment)
         }
 
+        binding.btnGruposHome.setOnClickListener {
+            findNavController().navigate(R.id.listaGruposFragment)
+        }
+
+        binding.btnLogout.setOnClickListener {
+            viewModel.deslogar()
+            findNavController().navigate(R.id.signInFragment)
+        }
+
         viewModel.usuario.observe(viewLifecycleOwner) {
             if (it != null) {
                 binding.tvNomeHome.text = it.nome

@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mensageiro.R
 import com.example.mensageiro.model.Grupo
 
-class GrupoAdapter(private val listaGrupos: List<Grupo>)
+class GrupoAdapter(
+    private val listaGrupos: List<Grupo>,
+    val grupoSelecionado: (Grupo) -> Unit)
     : RecyclerView.Adapter<GrupoAdapter.GrupoViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GrupoViewHolder {
@@ -21,6 +23,10 @@ class GrupoAdapter(private val listaGrupos: List<Grupo>)
 
         holder.tvNomeGrupoListGrupo.text = grupo.nome
         holder.tvDescricaoGrupoListGrupo.text = grupo.descricao
+
+        holder.itemView.setOnClickListener {
+            grupoSelecionado(grupo)
+        }
     }
 
     override fun getItemCount() = listaGrupos.size

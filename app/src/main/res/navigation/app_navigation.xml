@@ -43,5 +43,18 @@
         android:id="@+id/listaGruposFragment"
         android:name="com.example.mensageiro.ui.grupo.listaGrupos.ListaGruposFragment"
         android:label="fragment_lista_grupos"
-        tools:layout="@layout/fragment_lista_grupos" />
+        tools:layout="@layout/fragment_lista_grupos" >
+        <action
+            android:id="@+id/action_listaGruposFragment_to_detalhesGrupoFragment"
+            app:destination="@id/detalhesGrupoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detalhesGrupoFragment"
+        android:name="com.example.mensageiro.ui.grupo.detalhesGrupo.DetalhesGrupoFragment"
+        android:label="fragment_detalhes_grupo"
+        tools:layout="@layout/fragment_detalhes_grupo" >
+        <argument
+            android:name="idGrupo"
+            app:argType="string" />
+    </fragment>
 </navigation>

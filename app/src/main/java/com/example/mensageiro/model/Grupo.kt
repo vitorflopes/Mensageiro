@@ -1,11 +1,12 @@
 package com.example.mensageiro.model
 
 data class Grupo (
-    var lider: Usuario? = null,
+    var id: String? = null,
+    var idLider: String? = null,
     var nome: String? = null,
     var descricao: String? = null,
-    var listaTarefas: MutableList<Tarefa>? = null,
-    var listaParticipantes: MutableList<Usuario>? = null
+    var listaIdTarefas: MutableList<String>? = null,
+    var listaIdParticipantes: MutableList<String>? = null
         )
 
 data class Tarefa (
@@ -13,5 +14,5 @@ data class Tarefa (
     val nome: String? = null,
     val descricao: String? = null,
     val concluida: Boolean? = false,
-    val listaParticipantes: MutableList<Usuario>? = null
+    val listaIdParticipantes: MutableList<String>? = null
         )

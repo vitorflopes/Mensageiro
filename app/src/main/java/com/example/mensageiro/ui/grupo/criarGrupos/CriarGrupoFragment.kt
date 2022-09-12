@@ -29,13 +29,14 @@ class CriarGrupoFragment : Fragment() {
         binding.btnCriarGrupoCriarGrupo.setOnClickListener {
             val nomeGrupo = binding.etNomeGrupoCriar.text.toString()
             val descricao = binding.etDescricaoGrupo.text.toString()
-            val grupo = Grupo(null, nomeGrupo, descricao)
+            val grupo = Grupo(null, null, nomeGrupo, descricao)
             viewModel.cadastrarGrupo(grupo)
         }
 
         viewModel.status.observe(viewLifecycleOwner) {
             if (it) {
-                Toast.makeText(context, "Grupo criado.", Toast.LENGTH_LONG).show()
+                val idGrupoCriado = viewModel.msg.value
+                Toast.makeText(context, "Grupo criado.\n${idGrupoCriado}", Toast.LENGTH_LONG).show()
                 findNavController().popBackStack()
             }
         }

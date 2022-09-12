@@ -14,13 +14,12 @@ class HomeViewModel : ViewModel() {
         val idUsuarioLogado = AuthDao.getCurrentUser()!!.uid
 
         val task = UsuarioDao.exibirUsuario(idUsuarioLogado)
-        task.addSnapshotListener { snapshot, error ->
-            if (error != null) {
-
-            }
-            if (snapshot != null) {
-                usuario.value = snapshot.toObjects(Usuario::class.java).first()
-            }
+        task.addOnSuccessListener {
+            usuario.value = it.toObjects(Usuario::class.java).first()
         }
+    }
+
+    fun deslogar() {
+        AuthDao.deslogar()
     }
 }

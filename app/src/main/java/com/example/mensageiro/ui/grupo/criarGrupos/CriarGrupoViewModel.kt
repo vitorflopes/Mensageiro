@@ -11,23 +11,23 @@ import com.example.mensageiro.model.Usuario
 class CriarGrupoViewModel : ViewModel() {
 
     val status = MutableLiveData<Boolean>()
+    val msg = MutableLiveData<String>()
 
     init {
         status.value = false
     }
 
     fun cadastrarGrupo(grupo: Grupo) {
-
         val idUsusarioLogado = AuthDao.getCurrentUser()!!.uid
-        val task = UsuarioDao.exibirUsuario(idUsusarioLogado)
-        task.addSnapshotListener { snapshot, error ->
-            if (snapshot != null) {
-                val usuarioLogado = snapshot.toObjects(Usuario::class.java).first()
-                grupo.listaParticipantes = mutableListOf(usuarioLogado)
-                grupo.lider = usuarioLogado
-                GrupoDao.salvarGrupo(grupo)
-                status.value = true
-            }
+
+        grupo.listaIdParticipantes = mutableListOf(idUsusarioLogado)
+        grupo.idLider = idUsusarioLogado
+        GrupoDao.salvarGrupo(grupo).addOnSuccessListener {
+            msg.value = it.id
+            UsuarioDao.addIdGrupotoUsuario(idUsusarioLogado, it.id)
+            status.value = true
+        }.addOnFailureListener {
+            msg.value = it.message
         }
     }
 }
