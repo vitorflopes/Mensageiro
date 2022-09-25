@@ -17,6 +17,10 @@ class UsuarioDao {
             collection.document(idUsuario).set(usuario)
         }
 
+        fun retornaUsuariosDoGrupo(idGrupo: String): Task<QuerySnapshot> {
+            return collection.whereArrayContains("idGrupos", idGrupo).get()
+        }
+
         fun exibirUsuario(idUsuario: String): Task<QuerySnapshot> {
             return collection.whereEqualTo("id", idUsuario).get()
         }

@@ -46,7 +46,6 @@ class InfoGrupoFragment : Fragment() {
 
         binding.btnExcluirGrupo.setOnClickListener {
             viewModel.excluirGrupo(idGrupo)
-
             findNavController().popBackStack()
         }
 

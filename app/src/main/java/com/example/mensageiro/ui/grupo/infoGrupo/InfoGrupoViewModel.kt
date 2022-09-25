@@ -45,13 +45,13 @@ class InfoGrupoViewModel : ViewModel() {
                     TarefaDao.excluirTarefa(idTarefa)
                 }
             }
-
-            val idUsuario = AuthDao.getCurrentUser()!!.uid
-
-            val task = GrupoDao.excluirGrupo(idGrupo)
-            task.addOnSuccessListener {
-                UsuarioDao.removeIdGrupotoUsuario(idUsuario, idGrupo)
+            if (grupo.listaIdParticipantes!!.isNotEmpty()) {
+                for (idUsuario in grupo.listaIdParticipantes!!) {
+                    UsuarioDao.removeIdGrupotoUsuario(idUsuario, grupo.id!!)
+                }
             }
+
+            GrupoDao.excluirGrupo(idGrupo)
         }
     }
 }

@@ -25,6 +25,8 @@ class HomeFragment : Fragment() {
         val view = binding.root
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
+        viewModel.retornaFeriado()
+
         binding.btnCriarUmGrupoHome.setOnClickListener {
             findNavController().navigate(R.id.criarGrupoFragment)
         }
@@ -35,7 +37,8 @@ class HomeFragment : Fragment() {
 
         binding.btnLogout.setOnClickListener {
             viewModel.deslogar()
-            findNavController().navigate(R.id.signInFragment)
+            val direction = HomeFragmentDirections.actionHomeFragmentToSignInFragment()
+            findNavController().navigate(direction)
         }
 
         viewModel.usuario.observe(viewLifecycleOwner) {
@@ -44,6 +47,21 @@ class HomeFragment : Fragment() {
             }
         }
 
+        viewModel.feriado.observe(viewLifecycleOwner) {
+            if (it != null) {
+                binding.tvFeriadoH.text = it.name
+            }
+        }
+
         return view
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val user = viewModel.retornaUsuarioLogado()
+        if (user == null) {
+            val direction = HomeFragmentDirections.actionHomeFragmentToSignInFragment()
+            findNavController().navigate(direction)
+        }
     }
 }
