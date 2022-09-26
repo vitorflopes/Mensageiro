@@ -16,7 +16,6 @@ class SignUpViewModel : ViewModel() {
     }
 
     fun cadastrarUsuario(nome: String, email: String, senha: String) {
-
         val task = AuthDao.cadastrarUsuario(email, senha)
 
         task.addOnSuccessListener {

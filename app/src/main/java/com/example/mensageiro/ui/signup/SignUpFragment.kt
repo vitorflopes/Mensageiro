@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.example.mensageiro.R
 import com.example.mensageiro.databinding.FragmentSignUpBinding
@@ -25,16 +27,26 @@ class SignUpFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(SignUpViewModel::class.java)
 
         binding.btnCadastrar.setOnClickListener {
+            binding.pbLoadingSU.isVisible = true
             val nome = binding.etNomeCadastrar.text.toString()
             val email = binding.etEmailCadastro.text.toString()
             val senha = binding.etSenhaCadastro.text.toString()
-            viewModel.cadastrarUsuario(nome, email, senha)
+            if (nome.isNullOrBlank() || email.isNullOrBlank() || senha.isNullOrBlank()) {
+                Toast.makeText(requireContext(), "Preencha todos os campos!", Toast.LENGTH_LONG).show()
+            }
+            else {
+                viewModel.cadastrarUsuario(nome, email, senha)
+            }
         }
 
         viewModel.status.observe(viewLifecycleOwner) {
             if (it) {
                 findNavController().popBackStack()
             }
+        }
+
+        viewModel.msg.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
         }
 
         return view
