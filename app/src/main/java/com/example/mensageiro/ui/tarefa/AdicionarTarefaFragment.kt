@@ -31,9 +31,13 @@ class AdicionarTarefaFragment : Fragment() {
         binding.btnSalvarTarefaAdd.setOnClickListener {
             val nomeTarefa = binding.etNomeTarefaAdd.text.toString()
             val descricaoTarefa = binding.etDescricaoTarefaAdd.text.toString()
-            val tarefa = Tarefa(null, nomeTarefa, descricaoTarefa)
-
-            viewModel.adicionarTarefa(argumentos.idGrupo, tarefa)
+            if (nomeTarefa.isNullOrBlank() || descricaoTarefa.isNullOrBlank()) {
+                Toast.makeText(requireContext(), "Preencha todos os campos!", Toast.LENGTH_LONG).show()
+            }
+            else {
+                val tarefa = Tarefa(null, nomeTarefa, descricaoTarefa)
+                viewModel.adicionarTarefa(argumentos.idGrupo, tarefa)
+            }
         }
 
         viewModel.status.observe(viewLifecycleOwner) {
@@ -41,6 +45,10 @@ class AdicionarTarefaFragment : Fragment() {
                 Toast.makeText(context, "Tarefa criada.", Toast.LENGTH_LONG).show()
                 findNavController().popBackStack()
             }
+        }
+
+        binding.btnVoltarAT.setOnClickListener {
+            findNavController().popBackStack()
         }
 
         return view
