@@ -75,12 +75,20 @@ class CriarGrupoFragment : Fragment() {
             }
         }
 
-
         binding.btnCriarGrupoCriarGrupo.setOnClickListener {
             val nomeGrupo = binding.etNomeGrupoCriar.text.toString()
             val descricao = binding.etDescricaoGrupo.text.toString()
-            val grupo = Grupo(null, null, nomeGrupo, descricao)
-            viewModel.cadastrarGrupo(grupo)
+            if (nomeGrupo.isNullOrBlank() || descricao.isNullOrBlank()) {
+                Toast.makeText(requireContext(), "Preencha todos os campos!", Toast.LENGTH_LONG).show()
+            }
+            else {
+                val grupo = Grupo(null, null, nomeGrupo, descricao)
+                viewModel.cadastrarGrupo(grupo)
+            }
+        }
+
+        binding.btnVoltarCG.setOnClickListener {
+            findNavController().popBackStack()
         }
 
         viewModel.status.observe(viewLifecycleOwner) {

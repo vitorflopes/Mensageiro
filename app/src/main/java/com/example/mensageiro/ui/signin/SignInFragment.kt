@@ -71,11 +71,13 @@ class SignInFragment : Fragment() {
 
         viewModel.status.observe(viewLifecycleOwner) {
             if (it) {
-                findNavController().navigate(R.id.homeFragment)
+                val direction = SignInFragmentDirections.actionSignInFragmentToHomeFragment()
+                findNavController().navigate(direction)
             }
         }
 
         viewModel.msg.observe(viewLifecycleOwner) {
+            binding.pbLoadingSI.isVisible = false
             Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
         }
 

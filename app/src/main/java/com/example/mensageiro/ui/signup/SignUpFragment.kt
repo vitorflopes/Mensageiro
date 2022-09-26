@@ -32,6 +32,7 @@ class SignUpFragment : Fragment() {
             val email = binding.etEmailCadastro.text.toString()
             val senha = binding.etSenhaCadastro.text.toString()
             if (nome.isNullOrBlank() || email.isNullOrBlank() || senha.isNullOrBlank()) {
+                binding.pbLoadingSU.isVisible = false
                 Toast.makeText(requireContext(), "Preencha todos os campos!", Toast.LENGTH_LONG).show()
             }
             else {
@@ -46,6 +47,7 @@ class SignUpFragment : Fragment() {
         }
 
         viewModel.msg.observe(viewLifecycleOwner) {
+            binding.pbLoadingSU.isVisible = false
             Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
         }
 

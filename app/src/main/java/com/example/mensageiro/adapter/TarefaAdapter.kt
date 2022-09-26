@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mensageiro.R
@@ -35,6 +36,6 @@ class TarefaAdapter (
     class TarefaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvNomeTarefaAdapter: TextView = itemView.findViewById(R.id.tvNomeTarefaAdapter)
         val tvDescricaoTarefaAdapter: TextView = itemView.findViewById(R.id.tvDescricaoTarefaAdapter)
-        val btnExcluirTarefaAdapter: ImageButton = itemView.findViewById(R.id.btnDeletarTarefaAdapter)
+        val btnExcluirTarefaAdapter: ImageView = itemView.findViewById(R.id.btnDeletarTarefaAdapter)
     }
 }

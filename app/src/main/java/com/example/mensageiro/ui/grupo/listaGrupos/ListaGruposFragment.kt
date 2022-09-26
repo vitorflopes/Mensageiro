@@ -33,11 +33,16 @@ class ListaGruposFragment : Fragment() {
         viewModel.retornarListaGrupo()
 
         viewModel.listaGrupo.observe(viewLifecycleOwner) {
+            binding.tvNumGruposLG.text = it.size.toString()
             binding.rvListaGrupo.adapter = GrupoAdapter(it) { grupo ->
                 val direcao = ListaGruposFragmentDirections
                     .actionListaGruposFragmentToInfoGrupoFragment(grupo.id!!)
                 findNavController().navigate(direcao)
             }
+        }
+
+        binding.btnVoltarLG.setOnClickListener {
+            findNavController().popBackStack()
         }
 
         return view

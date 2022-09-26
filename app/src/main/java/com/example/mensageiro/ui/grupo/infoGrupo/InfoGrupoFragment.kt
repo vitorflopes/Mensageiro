@@ -55,6 +55,10 @@ class InfoGrupoFragment : Fragment() {
             findNavController().navigate(direcao)
         }
 
+        binding.btnVoltarIG.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         viewModel.grupo.observe(viewLifecycleOwner) {
             binding.tvNomeGrupoInfo.text = it.nome.toString()
             binding.tvDescricaoGrupoInfo.text = it.descricao.toString()
