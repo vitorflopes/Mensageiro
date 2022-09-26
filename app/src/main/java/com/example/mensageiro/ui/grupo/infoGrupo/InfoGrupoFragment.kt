@@ -65,7 +65,6 @@ class InfoGrupoFragment : Fragment() {
         viewModel.listaTarefas.observe(viewLifecycleOwner) {
             binding.rvListaTarefas.adapter = TarefaAdapter(it) { tarefa ->
                 viewModel.excluirTarefa(tarefa.id!!, idGrupo)
-                findNavController().popBackStack()
             }
         }
 

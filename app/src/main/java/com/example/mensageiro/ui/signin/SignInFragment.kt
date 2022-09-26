@@ -86,8 +86,7 @@ class SignInFragment : Fragment() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    val user = auth.currentUser
-                    findNavController().navigate(R.id.homeFragment)
+                    viewModel.salvaUserFacebook()
                 } else {
                     Toast.makeText(requireContext(), "Authentication failed.",
                         Toast.LENGTH_SHORT).show()

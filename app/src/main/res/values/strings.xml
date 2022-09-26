@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Mensageiro</string>
 
-    <string name="facebook_app_id">5445965935485980</string>
-    <string name="fb_login_protocol_scheme">fb5445965935485980</string>
-    <string name="facebook_client_token">10ddf12e7fb1028b7f34ad278c5622ae</string>
+    <string name="facebook_app_id">494902778846522</string>
+    <string name="fb_login_protocol_scheme">fb494902778846522</string>
+    <string name="facebook_client_token">cfbcbd3fee6b9b01c1ae4abfd61b36a1</string>
 </resources>

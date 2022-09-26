@@ -6,6 +6,7 @@ import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 
 class UsuarioDao {
@@ -13,8 +14,8 @@ class UsuarioDao {
     companion object {
         private val collection = Firebase.firestore.collection("Usuarios")
 
-        fun salvarUsuario(idUsuario: String, usuario: Usuario) {
-            collection.document(idUsuario).set(usuario)
+        fun salvarUsuario(idUsuario: String, usuario: Usuario): Task<Void> {
+            return collection.document(idUsuario).set(usuario)
         }
 
         fun retornaUsuariosDoGrupo(idGrupo: String): Task<QuerySnapshot> {
@@ -54,6 +55,15 @@ class UsuarioDao {
             }
 
             return task
+        }
+
+        fun salvaUserFacebook(idUsuario: String, nomeUsuario: String, emailUsuario: String): Task<QuerySnapshot> {
+            return  exibirUsuario(idUsuario).addOnSuccessListener {
+                if (it.toObjects(Usuario::class.java).size == 0) {
+                    val usuario = Usuario(idUsuario, nomeUsuario, emailUsuario)
+                    salvarUsuario(idUsuario, usuario)
+                }
+            }
         }
     }
 }

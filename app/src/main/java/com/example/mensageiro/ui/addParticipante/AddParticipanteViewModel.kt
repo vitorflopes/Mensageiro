@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.example.mensageiro.dao.GrupoDao
 import com.example.mensageiro.dao.UsuarioDao
 import com.example.mensageiro.model.Usuario
+import com.google.firebase.firestore.ktx.toObjects
 
 class AddParticipanteViewModel : ViewModel() {
 
@@ -17,10 +18,15 @@ class AddParticipanteViewModel : ViewModel() {
     fun adicionarParticipante(idGrupo: String, emailParticipante: String) {
         val task = UsuarioDao.exibirUsuarioByEmail(emailParticipante)
         task.addOnSuccessListener {
-            val usuario = it.toObjects(Usuario::class.java).first()
-            GrupoDao.addIdParticipanteToGrupo(usuario.id!!, idGrupo).addOnSuccessListener {
-                UsuarioDao.addIdGrupotoUsuario(usuario.id, idGrupo).addOnSuccessListener {
-                    status.value = true
+            if (it.toObjects(Usuario::class.java).size != 0) {
+                val usuario = it.toObjects(Usuario::class.java).first()
+                if (!usuario.listaIdGrupos!!.contains(idGrupo)) {
+                    val usuario = it.toObjects(Usuario::class.java).first()
+                    GrupoDao.addIdParticipanteToGrupo(usuario.id!!, idGrupo).addOnSuccessListener {
+                        UsuarioDao.addIdGrupotoUsuario(usuario.id, idGrupo).addOnSuccessListener {
+                            status.value = true
+                        }
+                    }
                 }
             }
         }
