@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.text.set
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -38,8 +39,16 @@ class EditarGrupoFragment : Fragment() {
         binding.btnSalvarEdicao.setOnClickListener {
             val nomeGrupo = binding.etNomeGrupoEditar.text.toString()
             val descricaoGrupo = binding.etDescricaoGrupoEditar.text.toString()
+            if (nomeGrupo.isNullOrBlank() || descricaoGrupo.isNullOrBlank()) {
+                Toast.makeText(requireContext(), "Preencha todos os campos!", Toast.LENGTH_LONG).show()
+            }
+            else {
+                viewModel.salvarGrupo(idGrupo, nomeGrupo, descricaoGrupo)
+            }
+        }
 
-            viewModel.salvarGrupo(idGrupo, nomeGrupo, descricaoGrupo)
+        binding.btnVoltarEG.setOnClickListener {
+            findNavController().popBackStack()
         }
 
         viewModel.status.observe(viewLifecycleOwner) {

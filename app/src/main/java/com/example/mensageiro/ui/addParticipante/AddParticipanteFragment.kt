@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -28,13 +29,22 @@ class AddParticipanteFragment : Fragment() {
 
         binding.btnAdicionarParticipanteAdd.setOnClickListener {
             val emailParticipante = binding.etEmailNovoParticipante.text.toString()
-            viewModel.adicionarParticipante(argumentos.idGrupo, emailParticipante)
+            if (emailParticipante.isNullOrBlank()) {
+                Toast.makeText(requireContext(), "Preencha o email!", Toast.LENGTH_LONG).show()
+            }
+            else {
+                viewModel.adicionarParticipante(argumentos.idGrupo, emailParticipante)
+            }
         }
 
         viewModel.status.observe(viewLifecycleOwner) {
             if (it) {
                 findNavController().popBackStack()
             }
+        }
+
+        binding.btnVoltarAP.setOnClickListener {
+            findNavController().popBackStack()
         }
 
         return view
